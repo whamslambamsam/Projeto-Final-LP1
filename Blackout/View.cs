@@ -15,6 +15,15 @@ namespace Blackout
                 table.AddRow("[red]Hard[/]", "8 x 8");
                 table.AddRow("Custom", "? x ?");
             AnsiConsole.Write(table);
+
+            var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[blue]Select difficulty:[/] ")
+                    .AddChoices("[green]Easy[/]", "[yellow]Medium[/]", 
+                    "[red]Hard[/]", "Custom")
+                    );
+            
+            AnsiConsole.MarkupLine($"[blue]Difficulty chosen:[/] {choice}");
         }
     }
 }
