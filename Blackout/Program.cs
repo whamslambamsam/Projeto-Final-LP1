@@ -1,4 +1,5 @@
 ﻿using System;
+using Spectre.Console;
 
 namespace Blackout
 {
@@ -6,7 +7,8 @@ namespace Blackout
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Hello LP!");
+            View difficulty = new View();
+            difficulty.DifficultySelect();
         }
     }
 }
