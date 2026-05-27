@@ -19,7 +19,7 @@ namespace Blackout
         /// Argument that calls a variable of the View class.
         /// </param>
         /// <returns>
-        /// A group of two int variables whose value depend on choice's value.
+        /// A Tuple whose values depend on choice's value.
         /// If the user's choice is "Custom", calls methods that ask for further
         /// inputs.
         /// </returns>
@@ -45,7 +45,7 @@ namespace Blackout
             {
                 "[green]Easy[/]" => 2,
                 "[yellow]Medium[/]" => 4,
-                "[red]Hard[/]" => 6,
+                "[red]Hard[/]" => 10,
                 "Custom" => view.RequestTouch(),
             };
         }
@@ -81,6 +81,53 @@ namespace Blackout
                     size[randCellX, randCellY + 1] = 
                         true;
             }
+        }
+
+        public (int, int) InitialPos(bool[,] size)
+        {
+            int inputX = size.GetLength(0) / 2;
+            int inputY = size.GetLength(1) / 2;  
+
+            return (inputX, inputY);
+        }
+
+        public (int, int) FlipCell(bool[,] size, (int, int) cursor)
+        {
+            int cursorX = cursor.Item1;
+            int cursorY = cursor.Item2;
+        }
+
+        public (int, int) HandleInput((int, int) cursor)
+        {
+            int cursorX = cursor.Item1;
+            int cursorY = cursor.Item2;
+
+            var key = Console.ReadKey(true).Key;
+
+            switch (key)
+            {
+                case ConsoleKey.UpArrow:
+                    cursorX--;
+                    break;
+
+                case ConsoleKey.DownArrow:
+                    cursorX++;
+                    break;
+
+                case ConsoleKey.LeftArrow:
+                    cursorY--;
+                    break;
+
+                case ConsoleKey.RightArrow:
+                    cursorY++;
+                    break;
+                
+                case ConsoleKey.Spacebar:
+                    FlipCell();
+                    break;
+            }
+
+            return (cursorX, cursorY);
         }
     }
 }
