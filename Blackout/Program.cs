@@ -40,15 +40,21 @@ namespace Blackout
                 AnsiConsole.MarkupLine("[blue]------------------------------------[/]");
 
                 AnsiConsole.MarkupLine("\n* Arrow keys to move the [yellow]cursor[/];");
-                AnsiConsole.MarkupLine("* Space to input choice.");
+                AnsiConsole.MarkupLine("* Enter key to input choice.");
                 AnsiConsole.MarkupLine("\nEmpty the grid to [green]win![/]\n");
 
                 AnsiConsole.MarkupLine("[blue]------------------------------------[/]");
                 viewer.GridDraw(dimensions, cursor);
                 AnsiConsole.MarkupLine("[blue]------------------------------------[/]");
 
-                cursor = control.HandleInput(cursor); // Grid only updates after
-                                                      // input!
+                if (control.CheckWin(dimensions) == true)
+                {
+                    AnsiConsole.MarkupLine("\n[green]You won![/] - Press a key to leave.");
+                    running = false;
+                }
+
+                cursor = control.HandleInput(dimensions, cursor); // Grid only updates after
+                                                                  // input!
             }
         }
     }
