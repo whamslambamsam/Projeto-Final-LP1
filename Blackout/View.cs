@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Xml.Serialization;
@@ -40,17 +41,39 @@ namespace Blackout
         public int RequestRow()
         {
             var rowNum = AnsiConsole.Ask<int>("Number of [blue]rows[/]?");
-            int row = rowNum;
+            while (rowNum <= 0)
+            {
+                AnsiConsole.MarkupLine("[red]Invalid value! -- Min. 1[/]");
+                rowNum = AnsiConsole.Ask<int>("Number of [blue]rows[/]?");
+            }
 
+            int row = rowNum;
             return row;
         }
 
         public int RequestColumn()
         {
             var columnNum = AnsiConsole.Ask<int>("Number of [red]columns[/]?");
+            while (columnNum <= 0)
+            {
+                AnsiConsole.MarkupLine("[red]Invalid value! -- Min. 1[/]");
+                columnNum = AnsiConsole.Ask<int>("Number of [red]columns[/]?");
+            }
+
             int column = columnNum;
-            
             return column;
+        }
+
+        public int RequestTouch()
+        {
+            var touchNum = AnsiConsole.Ask<int>("Number of [green]touches[/]?");
+            if(touchNum == 0)
+            {
+                AnsiConsole.MarkupLine("[yellow]Really?[/]");
+            }
+
+            int touch = touchNum;
+            return touch;
         }
 
         public void Load(int rows, int columns)
@@ -68,10 +91,10 @@ namespace Blackout
                     Thread.Sleep(2000);
                 });
 
-            AnsiConsole.MarkupLine("[green]Complete![/]");
+            AnsiConsole.MarkupLine("\n[green]Complete![/]");
         }
 
-        public bool GridDraw(bool[,] size)
+        public void GridDraw(bool[,] size)
         {
             int length = size.GetLength(0); // IA para saber como ler valores
             int width = size.GetLength(1); // das grids
@@ -87,13 +110,18 @@ namespace Blackout
             {
                 for (int y = 0; y < width; y++)
                 {
+                    if (size[x, y])
+                    {
+                        Console.Write(cell + " ");
+                    }
+                    else
+                    {
                         Console.Write(blank + " ");
+                    }
                 }
 
                 Console.WriteLine();
             }
-
-            return size[0,0];
         }
     }
 }
