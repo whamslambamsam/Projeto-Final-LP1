@@ -5,17 +5,21 @@ namespace Blackout
 {
     public class Program
     {
+        /// <summary>
+        /// O Main reune cada class da abordagem MVC,
+        /// partilhando variáveis usadas em diferentes métodos.
+        /// </summary>
         private static void Main(string[] args)
         {
             View viewer = new View();
             Controller control = new Controller();
             Model model = new Model();
 
-            var choice = viewer.DifficultySelect();
-            var (rows, cols) = control.GridBuilder(choice, viewer);
+            string choice = viewer.DifficultySelect();
+            (int rows, int cols) = control.GridBuilder(choice, viewer);
 
             viewer.Load(rows, cols);
-            var dimensions = model.GridSize(rows, cols);
+            bool[,] dimensions = model.GridSize(rows, cols);
             viewer.GridDraw(dimensions);
         }
     }
