@@ -130,7 +130,7 @@ namespace Blackout
         /// saber como ler valores nas grids e
         /// saber como "desenhar" grids
         /// </remarks>
-        public bool GridDraw(bool[,] size)
+        public void GridDraw(bool[,] size)
         {
             int length = size.GetLength(0); // IA para saber como ler valores
             int width = size.GetLength(1); // das grids
