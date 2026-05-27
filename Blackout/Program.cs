@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using Spectre.Console;
 
 namespace Blackout
@@ -12,6 +13,7 @@ namespace Blackout
         /// </summary>
         private static void Main(string[] args)
         {
+            bool running = true;
             View viewer = new View();
             Controller control = new Controller();
             Model model = new Model();
@@ -24,8 +26,30 @@ namespace Blackout
 
             viewer.Load(rows, cols);
             bool[,] dimensions = model.GridSize(rows, cols);
+            (int, int) cursor = control.InitialPos(dimensions);
             control.SquareAssort(dimensions, touch);
-            viewer.GridDraw(dimensions);
+
+            // While loop e HandleInput foram debugged com 
+            // ajuda de IA
+            while(running == true)
+            {
+                Console.Clear();
+
+                AnsiConsole.MarkupLine($"\n[blue]Difficulty[/] - {choice}");
+
+                AnsiConsole.MarkupLine("[blue]------------------------------------[/]");
+
+                AnsiConsole.MarkupLine("\n* Arrow keys to move the [yellow]cursor[/];");
+                AnsiConsole.MarkupLine("* Space to input choice.");
+                AnsiConsole.MarkupLine("\nEmpty the grid to [green]win![/]\n");
+
+                AnsiConsole.MarkupLine("[blue]------------------------------------[/]");
+                viewer.GridDraw(dimensions, cursor);
+                AnsiConsole.MarkupLine("[blue]------------------------------------[/]");
+
+                cursor = control.HandleInput(cursor); // Grid only updates after
+                                                      // input!
+            }
         }
     }
 }
