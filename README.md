@@ -102,3 +102,5 @@ Em View.cs: (GridDraw) IA foi usada para saber como ler valores nas grids e sabe
 Em Model.cs: (GridSize) Foi usado IA para perceber como é que se poderia fazer as grids.
 
 Em Controller.cs: (GridBuilder) Foi usada IA para dar debug e concertar um erro com looping de inputs. A lógica e concepção foi feita por nós, apenas foi usada Inteligência Artificial para evitar o erro. (SquareAssort) IA foi usada para saber como ler valores nas grids e randomizar quais as celulas da grid ficam ativas. (Toggle) IA foi usada para perceber como mostrar uma celula desativada.
+
+https://github.com/gitattributes/gitattributes/tree/master - Usado para configurar o .gitattributes.
