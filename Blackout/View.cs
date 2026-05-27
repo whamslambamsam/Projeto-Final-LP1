@@ -135,23 +135,29 @@ namespace Blackout
         /// saber como ler valores nas grids e
         /// saber como "desenhar" grids
         /// </remarks>
-        public void GridDraw(bool[,] size)
+        public void GridDraw(bool[,] size, (int, int) cursor)
         {
             int length = size.GetLength(0); // IA para saber como ler valores
             int width = size.GetLength(1); // das grids
 
+            int cursorX = cursor.Item1;
+            int cursorY = cursor.Item2;
+
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             string blank = "\u2B1C";
             string cell = char.ConvertFromUtf32(0x1F7E9);
-
-            Console.WriteLine();
+            string icon = char.ConvertFromUtf32(0x1F7E8);
 
             // IA usado para saber como "desenhar" grids
             for (int x = 0; x < length; x++)
             {
                 for (int y = 0; y < width; y++)
                 {
-                    if (size[x, y])
+                    if (x == cursorX && y == cursorY)
+                    {
+                        Console.Write(icon + " ");
+                    }
+                    else if (size[x, y])
                     {
                         Console.Write(cell + " ");
                     }
