@@ -13,10 +13,10 @@ namespace Blackout
         /// Method that forms the grid's "blueprint", so to speak.
         /// </summary>
         /// <param name="length">
-        /// The number of rows
+        /// The number of rows.
         /// </param>
         /// <param name="width">
-        /// The number of columns
+        /// The number of columns.
         /// </param>
         /// <returns>
         /// The grid's template.
